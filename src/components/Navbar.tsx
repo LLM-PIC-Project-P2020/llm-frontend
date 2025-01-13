@@ -1,4 +1,4 @@
-import { Alignment, Button, Navbar } from "@blueprintjs/core";
+import { Alignment, AnchorButton, Button, Navbar } from "@blueprintjs/core";
 import { useState } from "react";
 import UserSidebarDrawer from "./UserSidebarDrawer";
 
@@ -12,8 +12,8 @@ function NavigationBar() {
                 <Navbar.Group align={Alignment.RIGHT}>
                     <Navbar.Heading>Blueprint</Navbar.Heading>
                     <Navbar.Divider/>
-                    <Button className="bp5-minimal" icon="home" text="Home" />
-                    <Button className="bp5-minimal" icon="document" text="Files" />
+                    <AnchorButton className="bp5-minimal" icon="home" text="Home" href="/" />
+                    <AnchorButton className="bp5-minimal" icon="document" text="Playground" href="/playground" />
                     <Navbar.Divider />
                     <Button minimal icon='person' onClick={() => setOpen(true)}/>
                 </Navbar.Group>

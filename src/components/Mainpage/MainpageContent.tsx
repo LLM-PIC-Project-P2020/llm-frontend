@@ -38,12 +38,12 @@ function MainpageContent () {
                     <img src="placeholder-image.jpg" width={"100%"}/>
                 </ContentFlexImage>
                 <ContentFlexText>
-                    AAAA
+                    BBBB
                 </ContentFlexText>
             </ContentFlexBox>
             <ContentFlexBox>
                 <ContentFlexText>
-                    AAAA
+                    CCCC
                 </ContentFlexText>
                 <ContentFlexImage>
                     <img src="placeholder-image.jpg" width={"100%"}/>

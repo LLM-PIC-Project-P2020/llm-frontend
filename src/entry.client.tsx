@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App'
+import { hydrateRoot } from 'react-dom/client'
+import { HydratedRouter } from 'react-router/dom';
 
 import "normalize.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
@@ -8,8 +8,9 @@ import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 import './navbarfix.css';
 
-createRoot(document.getElementById('root')!).render(
+hydrateRoot(
+  document,
   <StrictMode>
-    <App />
+    <HydratedRouter />
   </StrictMode>,
 )

@@ -23,19 +23,19 @@ function ContentFlexImage({children} : Props) {
 
 function MainpageContent () {
     return <main style={{maxWidth: "1200px", marginLeft: "auto", marginRight: "auto"}}>
-        <img src="placeholder-image.jpg" style={{width: "1200px", height: "600px"}}/>
+        <img src="https://temp.im/1200x600" style={{width: "1200px", height: "600px"}}/>
         <div style={{display: "flex", flexDirection: "column", width: "100%"}}>
             <ContentFlexBox>
                 <ContentFlexText>
                     AAAA
                 </ContentFlexText>
                 <ContentFlexImage>
-                    <img src="placeholder-image.jpg" width={"100%"}/>
+                    <img src="https://temp.im/400x200"/>
                 </ContentFlexImage>
             </ContentFlexBox>
             <ContentFlexBox>
                 <ContentFlexImage>
-                    <img src="placeholder-image.jpg" width={"100%"}/>
+                    <img src="https://temp.im/400x200"/>
                 </ContentFlexImage>
                 <ContentFlexText>
                     BBBB
@@ -46,7 +46,7 @@ function MainpageContent () {
                     CCCC
                 </ContentFlexText>
                 <ContentFlexImage>
-                    <img src="placeholder-image.jpg" width={"100%"}/>
+                    <img src="https://temp.im/400x200"/>
                 </ContentFlexImage>
             </ContentFlexBox>
         </div>

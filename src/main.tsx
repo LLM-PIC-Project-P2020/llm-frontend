@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-// import './index.css'
-import Mainpage from './Mainpage';
+import App from './App'
 
 import "normalize.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
@@ -11,6 +10,6 @@ import './navbarfix.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Mainpage />
+    <App />
   </StrictMode>,
 )

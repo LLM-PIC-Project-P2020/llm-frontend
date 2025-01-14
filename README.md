@@ -1,50 +1,21 @@
-# React + TypeScript + Vite
+# LLM Program Learning Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the frontend code of LLM programming learning project.
+The frontend is written with React in TypeScript, and utilizes Vite and React Router as frameworks.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To contribute to this project, you need to set up an appropriate Node.js environment.
 
-## Expanding the ESLint configuration
+1. Download and install Node.js. v22.13.0 LTS is tested and should be used.
+2. Install dependencies. Simply run `npm install` and it should be good to go.
+3. Start development. To serve your site locally, try running `npm run dev`.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+You might need to configure a mirror for NPM registry if network problems are encountered.
 
-- Configure the top-level `parserOptions` property like this:
+## Deployment
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+This app is designed as a Single Page App (SPA), which means that only a single index page is used when deployed to a server.
+To deploy the project, first run `npm run build`, and then all files needed should be located in the `build` directory.
+As server side rendering (SSR) is disabled for now, only `client` directory should be generated.
+Simply copy all its content to a HTTP server, and redirect **ALL** requests to `index.html`.

@@ -5,7 +5,7 @@ function Playground () {
     return <>
         <NavigationBar />
         <PlaygroundContent />
-    </>
+    </>;
 }
 
-export default Playground
+export default Playground;

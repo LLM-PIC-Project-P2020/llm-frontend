@@ -28,7 +28,7 @@ function UserSidebarDrawer ({ isOpen, setOpen } : Props) {
 
             <Button style={{marginTop: "auto"}} icon="cog" minimal />
         </div>
-    </Drawer>
+    </Drawer>;
 }
 
 export default UserSidebarDrawer;

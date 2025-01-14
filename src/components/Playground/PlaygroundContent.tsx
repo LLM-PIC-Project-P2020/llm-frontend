@@ -1,5 +1,5 @@
-import PlaygroundChat from "./PlaygroundChat"
-import PlaygroundEditor from "./PlaygroundEditor"
+import PlaygroundChat from "./PlaygroundChat";
+import PlaygroundEditor from "./PlaygroundEditor";
 
 
 function PlaygroundContent () {
@@ -12,8 +12,8 @@ function PlaygroundContent () {
                 <PlaygroundEditor />
             </div>
         </div>
-    )
+    );
 }
 
-export default PlaygroundContent
+export default PlaygroundContent;
 

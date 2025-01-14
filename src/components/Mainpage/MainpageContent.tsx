@@ -6,19 +6,19 @@ interface Props {
 function ContentFlexBox ({children} : Props) {
     return <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-around"}}>
         {children}
-    </div>
+    </div>;
 }
 
 function ContentFlexText ({children} : Props) {
     return <div style={{flexBasis: "50%"}}>
         {children}
-    </div>
+    </div>;
 }
 
 function ContentFlexImage({children} : Props) {
     return <div style={{flexBasis: "40%"}}>
         {children}
-    </div>
+    </div>;
 }
 
 function MainpageContent () {
@@ -50,7 +50,7 @@ function MainpageContent () {
                 </ContentFlexImage>
             </ContentFlexBox>
         </div>
-    </main>
+    </main>;
 }
 
 export default MainpageContent;

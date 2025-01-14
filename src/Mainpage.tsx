@@ -7,7 +7,7 @@ function Mainpage () {
             <NavigationBar />
             <MainpageContent />
         </>
-    )
+    );
 }
 
 export default Mainpage;

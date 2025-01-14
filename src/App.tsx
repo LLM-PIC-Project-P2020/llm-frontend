@@ -1,6 +1,6 @@
-import { BrowserRouter, Route, Routes } from "react-router"
-import Mainpage from "./Mainpage"
-import Playground from "./Playground"
+import { BrowserRouter, Route, Routes } from "react-router";
+import Mainpage from "./Mainpage";
+import Playground from "./Playground";
 
 function App() {
     return <BrowserRouter>
@@ -8,7 +8,7 @@ function App() {
             <Route index element={<Mainpage/>} />
             <Route path="playground" element={<Playground />} />
         </Routes>
-    </BrowserRouter>
+    </BrowserRouter>;
 }
 
-export default App
+export default App;

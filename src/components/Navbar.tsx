@@ -18,7 +18,7 @@ function NavigationBar() {
                     <Button minimal icon='person' onClick={() => setOpen(true)}/>
                 </Navbar.Group>
             </Navbar>
-            <UserSidebarDrawer isOpen={isOpen} setOpen={setOpen} />
+            <UserSidebarDrawer isOpen={isOpen} setOpen={setOpen}/>
         </>
     );
 }

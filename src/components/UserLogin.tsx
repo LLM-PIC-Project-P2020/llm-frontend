@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Classes, FormGroup, InputGroup, Overlay2, Tooltip } from "@blueprintjs/core";
+import { Button, ButtonGroup, Classes, Dialog, DialogBody, DialogFooter, FormGroup, InputGroup, Tooltip } from "@blueprintjs/core";
 import { useState } from "react";
 import UserRegistration from "./UserRegistration";
 
@@ -19,34 +19,33 @@ function TogglePasswordDisplay({isClearText, setClearText} : {isClearText: boole
 function UserLogin({isOpen, setOpen} : { isOpen : boolean, setOpen : (arg0: boolean) => void})  {
     const [isClearText, setClearText] = useState(false);
     const [isRegistrationShown, setRegistrationShown] = useState(false);
+
+    const footerActions = <>
+        <Button intent="warning" text="忘记密码" />
+        <Button intent="primary" text="登录" rightIcon="arrow-right"/>
+    </>;
     
-    return (<Overlay2 
+    return (<Dialog 
         isOpen={isOpen} 
         onClose={() => setOpen(false)} 
         className={Classes.OVERLAY_SCROLL_CONTAINER}
         usePortal
-        hasBackdrop
+        title="登录"
     >
-        <>
-            <div className={Classes.CARD} style={{left: "calc(50vw - 200px)", width: "400px", top: "10vw"}}>
-                <FormGroup label="账户" labelFor="text-input">
-                    <InputGroup rightElement={RegisterButton(() => setRegistrationShown(true))}  style={{flexGrow: 1}}/>
-                </FormGroup>
+        <DialogBody>
+            <FormGroup label="账户" labelFor="text-input">
+                <InputGroup rightElement={RegisterButton(() => setRegistrationShown(true))}  style={{flexGrow: 1}}/>
+            </FormGroup>
 
-                <FormGroup label="密码" labelFor="text-input">
-                    <InputGroup type={isClearText ? "text" : "password"} rightElement={TogglePasswordDisplay({isClearText, setClearText})}/>
-                </FormGroup>
+            <FormGroup label="密码" labelFor="text-input">
+                <InputGroup type={isClearText ? "text" : "password"} rightElement={TogglePasswordDisplay({isClearText, setClearText})}/>
+            </FormGroup>
+        </DialogBody>
 
-                <ButtonGroup fill>
-                    <Button intent="warning" text="忘记密码" />
-                    <div style={{flexBasis: "10px"}} />
-                    <Button intent="primary" text="登录" rightIcon="arrow-right"/>
-                </ButtonGroup>
-            </div>
+        <DialogFooter actions={footerActions} />
 
-            <UserRegistration isOpen={isRegistrationShown} setOpen={setRegistrationShown} />
-        </>
-    </Overlay2>);
+        <UserRegistration isOpen={isRegistrationShown} setOpen={setRegistrationShown} />
+    </Dialog>);
 }
 
 export default UserLogin;

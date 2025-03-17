@@ -1,5 +1,5 @@
-import { Button, ButtonGroup, Classes, FormGroup, InputGroup, Overlay2 } from '@blueprintjs/core';
-import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import { Button, ButtonGroup, Classes, Dialog, DialogBody, FormGroup, InputGroup } from '@blueprintjs/core';
+import { FormEvent, useState } from 'react';
 
 import type { components } from '../../api/openapi';
 
@@ -32,14 +32,14 @@ export default function UserRegistration ({isOpen, setOpen} : { isOpen : boolean
         }
     };
 
-    return (<Overlay2 
+    return (<Dialog 
         isOpen={isOpen} 
         onClose={() => setOpen(false)} 
         className={Classes.OVERLAY_SCROLL_CONTAINER}
         usePortal
-        hasBackdrop
+        title="注册"
     >
-        <div className={Classes.CARD} style={{left: "calc(50vw - 200px)", width: "400px", top: "10vw"}}>
+        <DialogBody>
             <form onSubmit={handleSubmit}>
                 <FormGroup label="用户名" labelFor="text-input">
                     <InputGroup name="userName" onChange={(e) => setRegisterData({...registerData, userName: e.target.value})}/>
@@ -61,6 +61,6 @@ export default function UserRegistration ({isOpen, setOpen} : { isOpen : boolean
                     <Button intent="primary" type="submit" text="注册" rightIcon="arrow-right"/>
                 </ButtonGroup>
             </form>
-        </div>
-    </Overlay2>);
+        </DialogBody>
+    </Dialog>);
 }

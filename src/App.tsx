@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import Mainpage from "./Mainpage";
-import Playground from "./Playground";
+import Playground from "./components/Playground";
+import Courses from "./components/Courses";
 
 function App() {
     return (
@@ -8,6 +9,7 @@ function App() {
             <Routes>
                 <Route index element={<Mainpage />} />
                 <Route path="playground" element={<Playground />} />
+                <Route path="courses" element={<Courses />} />
             </Routes>
         </BrowserRouter>
     );

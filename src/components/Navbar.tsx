@@ -14,6 +14,7 @@ function NavigationBar() {
                     <Navbar.Divider/>
                     <AnchorButton className="bp5-minimal" icon="home" text="Home" href="/" />
                     <AnchorButton className="bp5-minimal" icon="document" text="Playground" href="/playground" />
+                    <AnchorButton className="bp5-minimal" icon="document" text="Courses" href="/courses" />
                     <Navbar.Divider />
                     <Button minimal icon='person' onClick={() => setOpen(true)}/>
                 </Navbar.Group>

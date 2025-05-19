@@ -11,7 +11,7 @@ const methods : MockMethod[] = [
         },
     },
     {
-        url: '/api/sessions',
+        url: '/api/session',
         method: 'post',
         rawResponse: async (req, res) => {
             let body = '';

@@ -33,7 +33,7 @@ function UserLogin({isOpen, setOpen} : { isOpen : boolean, setOpen : (arg0: bool
     
         try {
             console.dir(userDataRef.current);
-            const response = await fetch('/api/sessions', {
+            const response = await fetch('/api/session', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

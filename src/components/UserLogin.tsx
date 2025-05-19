@@ -3,6 +3,7 @@ import { FormEvent, useRef, useState } from "react";
 import UserRegistration from "./UserRegistration";
 import { components } from "../../api/openapi";
 import { useLocalStorage } from "usehooks-ts";
+import { UserLocalStorage } from "../localStorage/User";
 
 function RegisterButton(openRegistrationForm : () => void) {
     return (<Tooltip content={"注册"}>
@@ -22,11 +23,12 @@ function UserLogin({isOpen, setOpen} : { isOpen : boolean, setOpen : (arg0: bool
     const [isClearText, setClearText] = useState(false);
     const [isRegistrationShown, setRegistrationShown] = useState(false);
     const userDataRef = useRef<components['schemas']['LoginRequest']>({});
-    const [token, setToken] = useLocalStorage<string>('access_token', '');
+    const [storage, setStorage] = useLocalStorage<UserLocalStorage | null>('user', null);
 
     const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.assert(userDataRef.current != null);
+        if (!userDataRef.current)   return;
+        if (!(userDataRef.current.id && userDataRef.current.password))  return;
 
         /* TODO: This can cause memory leak. */
         const myToaster: Toaster = await OverlayToaster.createAsync({ position: "top" });
@@ -47,7 +49,7 @@ function UserLogin({isOpen, setOpen} : { isOpen : boolean, setOpen : (arg0: bool
             } else {
                 const key = await response.text();
                 console.log("Returned key:", key);
-                setToken(key);
+                setStorage({Id: userDataRef.current.id, AccessToken: key});
                 setOpen(false);
             }
         } catch (e) {

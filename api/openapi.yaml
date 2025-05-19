@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.1.0
 info:
   title: LLM PIC API Specification
   version: 0.1.0
@@ -86,7 +86,24 @@ paths:
           description: Failed
         '429':
           description: Rate-limited
-      
+
+  /courses:
+    get:
+      tags:
+        - Courses
+      security: []
+      operationId: enumerateCourses
+      description: Get all available courses.
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  schema:
+                    $ref: '#/components/schemas/Course'
 
 components:
   schemas:
@@ -122,6 +139,26 @@ components:
           type: string
         prompt:
           type: string
+    Class:
+      type: object
+      properties:
+        id:
+          type: string
+    Course:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'An identifier of the course. Note that it is also used to access the course.'
+        description:
+          type: string
+          description: 'Description'
+        classes:
+          type: array
+          items:
+            schema:
+              $ref: '#/components/schemas/Class'
+
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

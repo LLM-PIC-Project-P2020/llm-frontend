@@ -1,5 +1,5 @@
-import NavigationBar from "./components/Navbar";
-import PlaygroundContent from "./components/Playground/PlaygroundContent";
+import NavigationBar from "../Navbar";
+import PlaygroundContent from "./PlaygroundContent";
 
 function Playground () {
     return <>

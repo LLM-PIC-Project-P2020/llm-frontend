@@ -78,21 +78,21 @@ export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
         LoginRequest: {
-            id?: string;
-            password?: string;
+            id: string;
+            password: string;
         };
         User: {
             /**
              * Format: int64
              * @example 0
              */
-            id?: number;
+            id: number;
             /** @example example@example */
-            email?: string;
+            email: string;
             /** @example User */
-            userName?: string;
+            userName: string;
             /** Format: password */
-            password?: string;
+            password: string;
             status?: number;
         };
         LLMPropmt: {
@@ -104,10 +104,11 @@ export interface components {
         };
         Course: {
             /** @description An identifier of the course. Note that it is also used to access the course. */
-            id?: string;
-            /** @description Description */
+            id: number;
+            name: string;
             description?: string;
-            classes?: components["schemas"]["Class"][];
+            thumbnail?: string;
+            classes: components["schemas"]["Class"][];
         };
     };
     responses: never;
@@ -260,7 +261,9 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Course"][];
+                    "application/json": {
+                        courses?: components["schemas"]["Course"][];
+                    };
                 };
             };
         };

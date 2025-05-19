@@ -105,14 +105,20 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Course'
+                type: object
+                properties:
+                  courses:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Course'
 
 components:
   schemas:
     LoginRequest:
       type: object
+      required:
+        - id
+        - password
       properties:
         id:
           type: string
@@ -120,6 +126,11 @@ components:
           type: string
     User:
       type: object
+      required:
+        - id
+        - email
+        - userName
+        - password
       properties:
         id:
           type: integer
@@ -150,13 +161,20 @@ components:
           type: string
     Course:
       type: object
+      required:
+        - id
+        - name
+        - classes
       properties:
         id:
-          type: string
+          type: integer
           description: 'An identifier of the course. Note that it is also used to access the course.'
+        name:
+          type: string
         description:
           type: string
-          description: 'Description'
+        thumbnail:
+          type: string
         classes:
           type: array
           items:

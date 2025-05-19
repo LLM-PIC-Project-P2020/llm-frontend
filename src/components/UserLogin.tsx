@@ -3,7 +3,7 @@ import { FormEvent, useRef, useState } from "react";
 import UserRegistration from "./UserRegistration";
 import { components, operations } from "../../api/openapi";
 import { useLocalStorage } from "usehooks-ts";
-import { UserLocalStorage } from "../localStorage/User";
+import { UserLocalStorage } from "../Types/User";
 
 function RegisterButton(openRegistrationForm : () => void) {
     return (<Tooltip content={"注册"}>

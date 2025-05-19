@@ -1,7 +1,7 @@
 import { Button, Classes, Dialog, DialogBody, DialogFooter, FormGroup, InputGroup, Intent, OverlayToaster, Toaster, Tooltip } from "@blueprintjs/core";
 import { FormEvent, useRef, useState } from "react";
 import UserRegistration from "./UserRegistration";
-import { components } from "../../api/openapi";
+import { components, operations } from "../../api/openapi";
 import { useLocalStorage } from "usehooks-ts";
 import { UserLocalStorage } from "../localStorage/User";
 
@@ -47,9 +47,13 @@ function UserLogin({isOpen, setOpen} : { isOpen : boolean, setOpen : (arg0: bool
             if (!response.ok) {
                 myToaster.show({ message: 'Failed to log in.', intent: Intent.DANGER });
             } else {
-                const key = await response.text();
+                const key : operations['sessionLogin']['responses']['200']['content']['application/json'] = JSON.parse(await response.text());
+                if (!key.id || !key.token) {
+                    myToaster.show({ message: 'Unable to parse server response.', intent: Intent.DANGER });
+                    return;
+                }
                 console.log("Returned key:", key);
-                setStorage({Id: userDataRef.current.id, AccessToken: key});
+                setStorage({Id: key.id, AccessToken: key.token});
                 setOpen(false);
             }
         } catch (e) {

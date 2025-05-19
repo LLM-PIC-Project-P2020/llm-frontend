@@ -52,9 +52,14 @@ paths:
         '200':
           description: Successful, returning a new access token assigned to the session.
           content:
-            text/plain:
-              schema: 
-                type: string
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  token:
+                    type: string
         '400':
           description: Failed
     delete:

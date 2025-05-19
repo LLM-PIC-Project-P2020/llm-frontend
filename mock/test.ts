@@ -1,5 +1,10 @@
 import { MockConfig, MockMethod } from 'vite-plugin-mock';
-import { components } from "../api/openapi";
+import { components, operations } from "../api/openapi";
+
+const correct_session_post_response : operations['sessionLogin']['responses']['200']['content']['application/json'] = {
+    id: 1,
+    token: 'TEST_TOKEN'
+};
 
 const methods : MockMethod[] = [
     {
@@ -20,7 +25,7 @@ const methods : MockMethod[] = [
                 const obj : components['schemas']['LoginRequest'] = JSON.parse(body);
                 if (obj.id === 'admin' && obj.password === 'admin') {
                     res.statusCode = 200;
-                    res.end('TEST_TOKEN');
+                    res.end(JSON.stringify(correct_session_post_response));
                 } else {
                     res.statusCode = 400;
                     res.end();

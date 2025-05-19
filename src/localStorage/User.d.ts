@@ -1,5 +1,5 @@
 
 export type UserLocalStorage = {
-    Id: string;
+    Id: number;
     AccessToken: string;
 };

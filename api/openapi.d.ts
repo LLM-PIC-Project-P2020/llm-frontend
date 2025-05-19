@@ -100,7 +100,7 @@ export interface components {
             prompt?: string;
         };
         Class: {
-            id?: string;
+            id?: number;
         };
         Course: {
             /** @description An identifier of the course. Note that it is also used to access the course. */
@@ -108,7 +108,7 @@ export interface components {
             name: string;
             description?: string;
             thumbnail?: string;
-            classes: components["schemas"]["Class"][];
+            classes?: components["schemas"]["Class"][];
         };
     };
     responses: never;

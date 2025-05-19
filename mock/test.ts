@@ -6,6 +6,41 @@ const correct_session_post_response : operations['sessionLogin']['responses']['2
     token: 'TEST_TOKEN'
 };
 
+const courses_get_response : operations['enumerateCourses']['responses']['200']['content']['application/json'] = {
+    courses: [
+        {
+            id: 1,
+            name: "Stupid class",
+            classes: [{id: 0}],
+        },
+        {
+            id: 2,
+            name: "Very stupid class",
+            classes: [{id: 0}]
+        },
+        {
+            id: 3,
+            name: "Stupid class",
+            classes: [{id: 0}],
+        },
+        {
+            id: 4,
+            name: "Very stupid class",
+            classes: [{id: 0}]
+        },
+        {
+            id: 5,
+            name: "Stupid class",
+            classes: [{id: 0}],
+        },
+        {
+            id: 6,
+            name: "Very stupid class",
+            classes: [{id: 0}]
+        },
+    ]
+};
+
 const methods : MockMethod[] = [
     {
         url: '/api/mock',
@@ -32,6 +67,11 @@ const methods : MockMethod[] = [
                 }
             });
         },
+    },
+    {
+        url: '/api/courses',
+        method: 'get',
+        response: courses_get_response
     }
 ];
 

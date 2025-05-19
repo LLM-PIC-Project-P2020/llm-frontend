@@ -158,13 +158,12 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
     Course:
       type: object
       required:
         - id
         - name
-        - classes
       properties:
         id:
           type: integer

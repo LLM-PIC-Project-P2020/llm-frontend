@@ -1,7 +1,8 @@
-import { Button, Classes, Dialog, DialogBody, DialogFooter, FormGroup, InputGroup, Tooltip } from "@blueprintjs/core";
+import { Button, Classes, Dialog, DialogBody, DialogFooter, FormGroup, InputGroup, Intent, OverlayToaster, Toaster, Tooltip } from "@blueprintjs/core";
 import { FormEvent, useRef, useState } from "react";
 import UserRegistration from "./UserRegistration";
 import { components } from "../../api/openapi";
+import { useLocalStorage } from "usehooks-ts";
 
 function RegisterButton(openRegistrationForm : () => void) {
     return (<Tooltip content={"注册"}>
@@ -21,10 +22,14 @@ function UserLogin({isOpen, setOpen} : { isOpen : boolean, setOpen : (arg0: bool
     const [isClearText, setClearText] = useState(false);
     const [isRegistrationShown, setRegistrationShown] = useState(false);
     const userDataRef = useRef<components['schemas']['LoginRequest']>({});
+    const [token, setToken] = useLocalStorage<string>('access_token', '');
 
     const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.assert(userDataRef.current != null);
+
+        /* TODO: This can cause memory leak. */
+        const myToaster: Toaster = await OverlayToaster.createAsync({ position: "top" });
     
         try {
             console.dir(userDataRef.current);
@@ -36,8 +41,18 @@ function UserLogin({isOpen, setOpen} : { isOpen : boolean, setOpen : (arg0: bool
                 body: JSON.stringify(userDataRef.current)
             });
             console.log("Successful: " + response.ok);
+
+            if (!response.ok) {
+                myToaster.show({ message: 'Failed to log in.', intent: Intent.DANGER });
+            } else {
+                const key = await response.text();
+                console.log("Returned key:", key);
+                setToken(key);
+                setOpen(false);
+            }
         } catch (e) {
             console.log("Failed: " + e);
+            myToaster.show({ message: 'Failed to log in due to a network error.', intent: Intent.DANGER });
         }
     };
 

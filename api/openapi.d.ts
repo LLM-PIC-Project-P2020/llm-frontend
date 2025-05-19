@@ -56,6 +56,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/courses": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Get all available courses. */
+        get: operations["enumerateCourses"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -81,6 +98,16 @@ export interface components {
         LLMPropmt: {
             code?: string;
             prompt?: string;
+        };
+        Class: {
+            id?: string;
+        };
+        Course: {
+            /** @description An identifier of the course. Note that it is also used to access the course. */
+            id?: string;
+            /** @description Description */
+            description?: string;
+            classes?: components["schemas"]["Class"][];
         };
     };
     responses: never;
@@ -212,6 +239,26 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    enumerateCourses: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Course"][];
+                };
             };
         };
     };

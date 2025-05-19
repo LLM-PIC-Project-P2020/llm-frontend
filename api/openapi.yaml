@@ -102,8 +102,7 @@ paths:
               schema:
                 type: array
                 items:
-                  schema:
-                    $ref: '#/components/schemas/Course'
+                  $ref: '#/components/schemas/Course'
 
 components:
   schemas:
@@ -156,8 +155,7 @@ components:
         classes:
           type: array
           items:
-            schema:
-              $ref: '#/components/schemas/Class'
+            $ref: '#/components/schemas/Class'
 
   securitySchemes:
     ApiKeyAuth:

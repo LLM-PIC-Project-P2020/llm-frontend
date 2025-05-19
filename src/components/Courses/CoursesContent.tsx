@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { CourseEntry } from "../../Types/Course";
-import { components, operations } from "../../../api/openapi";
+import { operations } from "../../../api/openapi";
+import { Card } from "@blueprintjs/core";
 
 function CoursesContent() {
     const [courses, setCourses] = useState<CourseEntry[]>();
@@ -23,8 +24,8 @@ function CoursesContent() {
                     lst.push({
                         Id: c.id,
                         Name: c.name,
-                        Description: c.description ?? "",
-                        ThumbnailUrl: c.thumbnail ? new URL(c.thumbnail) : new URL("")
+                        Description: c.description ?? "Missing description.",
+                        ThumbnailUrl: c.thumbnail ? new URL(c.thumbnail) : new URL("https://placeholder.im/300x200/cccccc")
                     });
                 }
                 setCourses(lst);
@@ -36,7 +37,22 @@ function CoursesContent() {
         fetchData();
     }, []);
 
-    
+    const elements : ReactElement[] = [];
+    for (const c of courses??[]) {
+        elements.push(
+            <Card key={`courses-card-${c.Id}`} interactive onClick={() => window.location.href=`/courses/${c.Id}`}>
+                <img src={c.ThumbnailUrl.toString()} style={{width: '100%'}}/>
+                <h3>{c.Name}</h3>
+                <p>{c.Description}</p>
+            </Card>
+        );
+    }
+
+    return <div style={{display: 'flex', alignContent: 'center', justifyContent: 'center', marginTop: '50px'}}>
+        <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 30%)', width: 'min(1200px, 80%)', alignContent: 'center', gridGap: '10%'}}>
+            {elements}
+        </div>
+    </div>;
 }
 
 export default CoursesContent;

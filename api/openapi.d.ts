@@ -73,6 +73,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/classes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Get all available classes of a given course. */
+        get: operations["enumerateClasses"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/classContent": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Get the content of a given class. */
+        get: operations["getClassContent"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -100,7 +134,8 @@ export interface components {
             prompt?: string;
         };
         Class: {
-            id?: number;
+            id: number;
+            name: string;
         };
         Course: {
             /** @description An identifier of the course. Note that it is also used to access the course. */
@@ -108,7 +143,6 @@ export interface components {
             name: string;
             description?: string;
             thumbnail?: string;
-            classes?: components["schemas"]["Class"][];
         };
     };
     responses: never;
@@ -126,7 +160,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 "application/json": components["schemas"]["LLMPropmt"];
             };
@@ -164,7 +198,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 "application/json": components["schemas"]["LoginRequest"];
             };
@@ -217,7 +251,7 @@ export interface operations {
             cookie?: never;
         };
         /** @description Requested user. */
-        requestBody?: {
+        requestBody: {
             content: {
                 "application/json": components["schemas"]["User"];
             };
@@ -265,6 +299,84 @@ export interface operations {
                         courses?: components["schemas"]["Course"][];
                     };
                 };
+            };
+        };
+    };
+    enumerateClasses: {
+        parameters: {
+            query: {
+                /** @description The ID of the course to be queried. */
+                id: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        classes?: components["schemas"]["Class"][];
+                    };
+                };
+            };
+            /** @description Bad request. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getClassContent: {
+        parameters: {
+            query: {
+                /** @description The ID of the class to be queried. */
+                classId: number;
+                /** @description The ID of the course to be queried. */
+                courseId: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/html": string;
+                };
+            };
+            /** @description Bad request. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Not found. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

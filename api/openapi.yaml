@@ -17,6 +17,7 @@ paths:
       operationId: tutorRespond
       description: Acquire a streaming response from LLM background.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -35,7 +36,6 @@ paths:
         '429':
           description: Rate-limited
 
-
   /session:
     post:
       tags:
@@ -44,6 +44,7 @@ paths:
       operationId: sessionLogin
       description: Authenticate and create a new session.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -79,6 +80,7 @@ paths:
       operationId: userCreate
       description: Create a new user.
       requestBody:
+        required: true
         description: Requested user.
         content:
           application/json:
@@ -111,6 +113,71 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Course'
+  
+  /classes:
+    get:
+      tags:
+        - Courses
+      security: []
+      operationId: enumerateClasses
+      description: Get all available classes of a given course.
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: The ID of the course to be queried.
+      responses:
+        '200':
+          description: Successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  classes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Class'
+        '400':
+          description: Bad request.
+        '404':
+          description: Not found.
+  
+  /classContent:
+    get:
+      tags:
+        - Courses
+      security: []
+      operationId: getClassContent
+      description: Get the content of a given class.
+      parameters:
+        - in: query
+          name: classId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the class to be queried.
+        - in: query
+          name: courseId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the course to be queried.
+      responses:
+        '200':
+          description: Successful.
+          content:
+            text/html:
+              schema:
+                type: string
+                description: Raw HTML of the content of the class. (Maybe XSS susceptible)
+        '400':
+          description: Bad request.
+        '404':
+          description: Not found.
+
 
 components:
   schemas:
@@ -156,9 +223,14 @@ components:
           type: string
     Class:
       type: object
+      required:
+        - id
+        - name
       properties:
         id:
           type: integer
+        name:
+          type: string
     Course:
       type: object
       required:
@@ -174,10 +246,6 @@ components:
           type: string
         thumbnail:
           type: string
-        classes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Class'
 
   securitySchemes:
     ApiKeyAuth:

@@ -48,8 +48,8 @@ function CoursesContent() {
         );
     }
 
-    return <div style={{display: 'flex', alignContent: 'center', justifyContent: 'center', marginTop: '50px'}}>
-        <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 30%)', width: 'min(1200px, 80%)', alignContent: 'center', gridGap: '10%'}}>
+    return <div className="CoursesContainerPage">
+        <div className="CoursesContainer">
             {elements}
         </div>
     </div>;

@@ -1,0 +1,29 @@
+.class-app {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    max-width: 1200px;
+    min-height: 100vh;
+}
+
+.class-nav-wrapper {
+    flex-basis: 350px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.class-nav {
+    box-shadow: 1px 0 0 rgba(17,20,24,.15);
+    overflow: hidden auto;
+    height: calc(100vh - 40px);
+}
+
+.class-main-wrapper {
+    flex-basis: 850px;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.class-main {
+    padding: 0 5px 40px 40px;
+}

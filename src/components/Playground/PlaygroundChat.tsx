@@ -30,6 +30,14 @@ function PlaygroundChat ({ code } : PlaygroundChatProps) {
                 return;
             }
 
+            const reader = resp.body.pipeThrough(new TextDecoderStream()).getReader();
+            while (true) {
+                const {done, value} = await reader.read();
+                if (done) {
+                    break;
+                }
+                setOutput((output) => output + value);
+            }
             setOutput(await resp.text());
         };
         api_fetch();

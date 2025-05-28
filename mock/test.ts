@@ -11,32 +11,26 @@ const courses_get_response : operations['enumerateCourses']['responses']['200'][
         {
             id: 1,
             name: "Stupid class",
-            classes: [{id: 0}],
         },
         {
             id: 2,
-            name: "Very stupid class",
-            classes: [{id: 0}]
+            name: "Very stupid class"
         },
         {
             id: 3,
-            name: "Stupid class",
-            classes: [{id: 0}],
+            name: "Stupid class"
         },
         {
             id: 4,
-            name: "Very stupid class",
-            classes: [{id: 0}]
+            name: "Very stupid class"
         },
         {
             id: 5,
-            name: "Stupid class",
-            classes: [{id: 0}],
+            name: "Stupid class"
         },
         {
             id: 6,
-            name: "Very stupid class",
-            classes: [{id: 0}]
+            name: "Very stupid class"
         },
     ]
 };
@@ -72,6 +66,19 @@ const methods : MockMethod[] = [
         url: '/api/courses',
         method: 'get',
         response: courses_get_response
+    },
+    {
+        url: '/api/tutorResponse',
+        method: 'post',
+        rawResponse: async (req, res) => {
+            let body = '';
+            req.on('data', (chunk) => {body += chunk;});
+            req.on('end', () => {
+                const obj : components['schemas']['LLMPropmt'] = JSON.parse(body);
+
+                res.end(`输入的代码为：${obj.code}\n输入的提示为：${obj.prompt}`);
+            });
+        }
     }
 ];
 

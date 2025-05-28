@@ -1,4 +1,4 @@
-import { Button, TextArea } from "@blueprintjs/core";
+import { Button, Intent, OverlayToaster, TextArea } from "@blueprintjs/core";
 import { useRef, useState } from "react";
 import { operations } from "../../../api/openapi";
 
@@ -8,11 +8,13 @@ interface PlaygroundChatProps {
 
 function PlaygroundChat ({ code } : PlaygroundChatProps) {
     const promptRef = useRef<string>("");
+    const [waitingOutput, setWaitingOutput] = useState<boolean>(false);
     const [output, setOutput] = useState<string>("大模型输出");
 
     const onSubmit = () => {
         if (!promptRef.current) return;
 
+        setWaitingOutput(true);
         const requestBody : operations['tutorRespond']['requestBody']['content']['application/json'] = {
             'code': code,
             'prompt': promptRef.current
@@ -38,9 +40,14 @@ function PlaygroundChat ({ code } : PlaygroundChatProps) {
                 }
                 setOutput((output) => output + value);
             }
-            setOutput(await resp.text());
         };
-        api_fetch();
+        api_fetch()
+            .then(() => setWaitingOutput(false))
+            .catch((e) => {
+                /* TODO: Fix this memory leak. */
+                OverlayToaster.create().show({message: `发生错误：${e}`, intent: Intent.DANGER });
+                setWaitingOutput(false);
+            });
     };
 
     return <div style={{
@@ -59,7 +66,12 @@ function PlaygroundChat ({ code } : PlaygroundChatProps) {
                 placeholder={"大模型输入"} 
                 onChange={(e) => promptRef.current = e.target.value} 
             />
-            <Button style={{flexBasis: "2rem"}} icon='arrow-right' onClick={() => onSubmit()}/>
+            <Button 
+                style={{flexBasis: "2rem"}} 
+                icon='arrow-right' 
+                onClick={() => onSubmit()}
+                disabled={waitingOutput}
+            />
         </div>
     </div>;
 }

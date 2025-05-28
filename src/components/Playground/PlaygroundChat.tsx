@@ -17,7 +17,7 @@ function PlaygroundChat ({ code } : PlaygroundChatProps) {
             'code': code,
             'prompt': promptRef.current
         };
-        fetch('/api/tutorResponse', {
+        fetch('/api/tutorResponse/', {
             method: 'POST',
             body: JSON.stringify(requestBody)
         }).then((e) => e.text())

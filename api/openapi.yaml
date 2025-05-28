@@ -10,7 +10,7 @@ tags:
   - name: Session
 
 paths:
-  /tutorResponse:
+  /tutorResponse/:
     post:
       tags:
         - LLM
@@ -36,7 +36,7 @@ paths:
         '429':
           description: Rate-limited
 
-  /session:
+  /session/:
     post:
       tags:
           - Session
@@ -72,7 +72,7 @@ paths:
         '200':
           description: Successful
 
-  /user:
+  /user/:
     post:
       tags:
         - User
@@ -94,7 +94,7 @@ paths:
         '429':
           description: Rate-limited
 
-  /courses:
+  /courses/:
     get:
       tags:
         - Courses
@@ -114,7 +114,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/Course'
   
-  /classes:
+  /classes/:
     get:
       tags:
         - Courses
@@ -145,7 +145,7 @@ paths:
         '404':
           description: Not found.
   
-  /classContent:
+  /classContent/:
     get:
       tags:
         - Courses

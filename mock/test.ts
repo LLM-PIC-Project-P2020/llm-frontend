@@ -37,7 +37,7 @@ const courses_get_response : operations['enumerateCourses']['responses']['200'][
 
 const methods : MockMethod[] = [
     {
-        url: '/api/mock',
+        url: '/api/mock/',
         method: 'get',
         rawResponse: async (req, res) => {
             res.statusCode = 200;
@@ -45,7 +45,7 @@ const methods : MockMethod[] = [
         },
     },
     {
-        url: '/api/session',
+        url: '/api/session/',
         method: 'post',
         rawResponse: async (req, res) => {
             let body = '';
@@ -63,12 +63,12 @@ const methods : MockMethod[] = [
         },
     },
     {
-        url: '/api/courses',
+        url: '/api/courses/',
         method: 'get',
         response: courses_get_response
     },
     {
-        url: '/api/tutorResponse',
+        url: '/api/tutorResponse/',
         method: 'post',
         rawResponse: async (req, res) => {
             let body = '';

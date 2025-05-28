@@ -1,0 +1,18 @@
+.img-advantages {
+    filter: drop-shadow(0 0 4px #4444dd);
+    border-radius: 10px;
+}
+
+.context-flex-full-container {
+    display: flex; 
+    flex-direction: column; 
+    width: 100%;
+}
+
+.context-flex-box-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}

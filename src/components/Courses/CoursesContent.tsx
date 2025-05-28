@@ -9,7 +9,7 @@ function CoursesContent() {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                const resp = await fetch('/api/courses');
+                const resp = await fetch('/api/courses/');
                 if (!resp.ok) {
                     console.log('Failed to fetch courses data:', resp.statusText);
                     return;

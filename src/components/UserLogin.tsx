@@ -22,7 +22,7 @@ function TogglePasswordDisplay({isClearText, setClearText} : {isClearText: boole
 function UserLogin({isOpen, setOpen} : { isOpen : boolean, setOpen : (arg0: boolean) => void})  {
     const [isClearText, setClearText] = useState(false);
     const [isRegistrationShown, setRegistrationShown] = useState(false);
-    const userDataRef = useRef<components['schemas']['LoginRequest']>({});
+    const userDataRef = useRef<components['schemas']['LoginRequest']>({id: '0', password: ''});
     const [storage, setStorage] = useLocalStorage<UserLocalStorage | null>('user', null);
 
     const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {

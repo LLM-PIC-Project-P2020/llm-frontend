@@ -5,7 +5,12 @@ import type { components } from '../../api/openapi';
 
 export default function UserRegistration ({isOpen, setOpen} : { isOpen : boolean, setOpen : (arg0: boolean) => void }) {
 
-    const [registerData, setRegisterData] = useState<components['schemas']['User']>();
+    const [registerData, setRegisterData] = useState<components['schemas']['User']>({
+        id: 0,
+        email: "",
+        userName: "",
+        password: ""
+    });
     const [passwordRepeated, setPasswordRepeated] = useState<string>("");
 
     const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {

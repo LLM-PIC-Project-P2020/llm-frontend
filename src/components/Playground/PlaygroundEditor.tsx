@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Editor from "react-simple-code-editor";
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
@@ -6,11 +5,12 @@ import 'prismjs/themes/prism.css';
 import Prism from "prismjs";
 import { Classes } from "@blueprintjs/core";
 
+interface PlaygroundEditorProps {
+    code: string;
+    setCode: (arg0: string) => void;
+}
 
-function PlaygroundEditor () {
-    const [code, setCode] = useState(
-        "import numpy as np\nprint('hello, world')\n"
-    );
+function PlaygroundEditor ({ code, setCode } : PlaygroundEditorProps) {
     return <div className={Classes.INPUT} style={{
         flexGrow: "1", 
         marginTop: 10, 

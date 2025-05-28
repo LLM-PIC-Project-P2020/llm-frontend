@@ -17,12 +17,22 @@ function PlaygroundChat ({ code } : PlaygroundChatProps) {
             'code': code,
             'prompt': promptRef.current
         };
-        fetch('/api/tutorResponse/', {
-            method: 'POST',
-            body: JSON.stringify(requestBody)
-        }).then((e) => e.text())
-            .then((e) => setOutput(e))
-            .catch((e) => console.error(e));
+
+        const api_fetch = async () => {
+            setOutput("");
+            const resp = await fetch('/api/tutorResponse/', {
+                method: 'POST',
+                body: JSON.stringify(requestBody)
+            });
+
+            if(!resp.ok || resp.body == null) {
+                setOutput("服务器繁忙，请稍后再试。");
+                return;
+            }
+
+            setOutput(await resp.text());
+        };
+        api_fetch();
     };
 
     return <div style={{
